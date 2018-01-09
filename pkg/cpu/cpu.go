@@ -163,8 +163,8 @@ func (c *Cpu) ProcessOpcode() error {
 			break
 		}
 
-	case 0x1000:
-		// 0x1NNN: Jump to address NNN.
+	case 0x2000:
+		// 0x2NNN: Call subrouting at 0xNNN
 		opcodeFound = true
 		c.Stack[c.StackPointer] = c.PC
 		c.StackPointer += 1

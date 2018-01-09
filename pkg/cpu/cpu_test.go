@@ -116,12 +116,12 @@ func Test00e0(t *testing.T) {
 	assert.True(cpu.ShouldDraw)
 }
 
-// Test 0x1NNN: Jump to address NNN.
-func Test1nnn(t *testing.T) {
+// Test 0x2NNN: Jump to address NNN.
+func Test2nnn(t *testing.T) {
 	assert := asrt.New(t)
 
 	g := &graphics.Noop{}
-	r := []byte{0x12, 0x34}
+	r := []byte{0x22, 0x34}
 	cpu := NewCpu(g, r, false)
 
 	// Make sure that the CPU state is good before processing the opcode.

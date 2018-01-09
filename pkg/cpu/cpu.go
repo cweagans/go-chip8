@@ -163,6 +163,12 @@ func (c *Cpu) ProcessOpcode() error {
 			break
 		}
 
+	case 0x1000:
+		// 0x1NNN: Jump to 0xNNN
+		opcodeFound = true
+		c.PC = c.Op & 0x0FFF
+		break
+
 	case 0x2000:
 		// 0x2NNN: Call subrouting at 0xNNN
 		opcodeFound = true

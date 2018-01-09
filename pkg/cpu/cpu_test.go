@@ -116,6 +116,24 @@ func Test00e0(t *testing.T) {
 	assert.True(cpu.ShouldDraw)
 }
 
+// Test 0x1NNN: Jump to 0xNNN.
+func Test1nnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x12, 0x34}
+	cpu := NewCpu(g, r, false)
+
+	// Make sure that the CPU state is good before processing the opcode.
+	assert.Equal(uint16(0x200), cpu.PC)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+
+	assert.NoError(err)
+	assert.Equal(uint16(0x234), cpu.PC)
+}
+
 // Test 0x2NNN: Call subrouting at 0xNNN.
 func Test2nnn(t *testing.T) {
 	assert := asrt.New(t)

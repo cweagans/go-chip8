@@ -132,7 +132,7 @@ func (c *Cpu) GetOp() {
 
 	// An opcode is two bytes, starting at c.PC. The first byte is bitshift-ed to the left,
 	// and then ORed with the second byte. The end result is a 16 bit opcode.
-	c.Op = uint16(c.Memory[c.PC]<<8 | c.Memory[c.PC+1])
+	c.Op = (uint16(c.Memory[c.PC]) << 8) | uint16(c.Memory[c.PC+1])
 
 	if c.Debug && (oldOp != c.Op) {
 		fmt.Printf("New opcode: 0x%X\n", c.Op)

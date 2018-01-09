@@ -116,7 +116,7 @@ func Test00e0(t *testing.T) {
 	assert.True(cpu.ShouldDraw)
 }
 
-// Test 0x2NNN: Jump to address NNN.
+// Test 0x2NNN: Call subrouting at 0xNNN.
 func Test2nnn(t *testing.T) {
 	assert := asrt.New(t)
 

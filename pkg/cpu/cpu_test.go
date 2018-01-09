@@ -78,6 +78,13 @@ func TestGetOp(t *testing.T) {
 	cpu.GetOp()
 	assert.Equal(uint16(0x0000), cpu.Op)
 	assert.True(cpu.ShouldHalt)
+
+	// Let's try with an opcode that doesn't start with 0x00, as that may hide
+	// some errors.
+	cpu.LoadRom([]byte{0x12, 0x34})
+	cpu.PC = uint16(0x0200)
+	cpu.GetOp()
+	assert.Equal(uint16(0x1234), cpu.Op)
 }
 
 // Test 00e0: Clears the vram and sets ShouldDraw to true.

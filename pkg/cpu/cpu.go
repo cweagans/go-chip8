@@ -119,6 +119,13 @@ func (c *Cpu) Run() {
 	}
 }
 
+func (c *Cpu) DumpMemory() {
+	fmt.Println("Address\tValue")
+	for m := 0; m < 4096; m++ {
+		fmt.Printf("0x%X\t0x%X\n", m, c.Memory[m])
+	}
+}
+
 // Get next opcode.
 func (c *Cpu) GetOp() {
 	oldOp := c.Op

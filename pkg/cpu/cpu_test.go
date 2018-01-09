@@ -135,11 +135,4 @@ func Test1nnn(t *testing.T) {
 	assert.Equal(1, cpu.StackPointer)
 	assert.Equal(uint16(0x234), cpu.PC)
 	assert.Equal(uint16(0x200), cpu.Stack[0])
-
-	// sp := cpu.StackPointer
-	// pc := cpu.PC
-	// stack := copy(cpu.Stack)
-
-	// assert.Equal(0, sp)
-
 }

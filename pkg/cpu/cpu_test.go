@@ -124,5 +124,22 @@ func Test1nnn(t *testing.T) {
 	r := []byte{0x12, 0x34}
 	cpu := NewCpu(g, r, false)
 
-	// @TODO: complete test.
+	// Make sure that the CPU state is good before processing the opcode.
+	assert.Equal(0, cpu.StackPointer)
+	assert.Equal(uint16(0x200), cpu.PC)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+
+	assert.NoError(err)
+	assert.Equal(1, cpu.StackPointer)
+	assert.Equal(uint16(0x234), cpu.PC)
+	assert.Equal(uint16(0x200), cpu.Stack[0])
+
+	// sp := cpu.StackPointer
+	// pc := cpu.PC
+	// stack := copy(cpu.Stack)
+
+	// assert.Equal(0, sp)
+
 }

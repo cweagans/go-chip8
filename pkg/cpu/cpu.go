@@ -9,19 +9,17 @@ import (
 
 // Cpu is the core model of the system.
 type Cpu struct {
-	Graphics   graphics.Graphics
-	Vram       [64 * 32]bool
-	ShouldDraw bool
-
-	Memory     [4096]byte
-	PC         uint16
-	Op         uint16
-	ShouldHalt bool
-
+	Graphics     graphics.Graphics
+	Vram         [64 * 32]bool
+	ShouldDraw   bool
+	ClockSpeed   int
+	Memory       [4096]byte
+	PC           uint16
+	Op           uint16
+	ShouldHalt   bool
 	Stack        [16]uint16
 	StackPointer int
-
-	Debug bool
+	Debug        bool
 }
 
 // UnknownOpcodeError is returned when the CPU encounters an opcode that it does
@@ -60,10 +58,16 @@ func NewCpu(g graphics.Graphics, r []byte, debug bool) *Cpu {
 	cpu.ShouldDraw = false
 	cpu.ShouldHalt = false
 	cpu.Debug = debug
+	cpu.ClockSpeed = 60
 
 	cpu.LoadRom(r)
 
 	return cpu
+}
+
+// Set the CPU clock speed.
+func (c *Cpu) SetClockSpeed(s int) {
+	c.ClockSpeed = s
 }
 
 // Loads the supplied ROM bytes into memory starting at 0x200.
@@ -92,7 +96,7 @@ func (c *Cpu) ClearVram() {
 func (c *Cpu) Run() {
 
 	// The CPU should run at 60Hz.
-	for range time.Tick(time.Second / 60) {
+	for range time.Tick(time.Second / c.ClockSpeed) {
 		// Get the next opcode.
 		c.GetOp()
 

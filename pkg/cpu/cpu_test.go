@@ -116,6 +116,29 @@ func Test00e0(t *testing.T) {
 	assert.True(cpu.ShouldDraw)
 }
 
+// Test 00EE: Return from a subroutine.
+func Test00ee(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x00, 0xE0, 0x00, 0xEE}
+	cpu := NewCpu(g, r, false)
+
+	cpu.PC = 0x202
+	cpu.Stack[0] = 0x200
+	cpu.StackPointer = 1
+
+	// Load the opcode, and then process it.
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+
+	assert.NoError(err)
+
+	assert.Equal(uint16(0x200), cpu.PC)
+	assert.Equal(0, cpu.StackPointer)
+	assert.Equal(uint16(0), cpu.Stack[0])
+}
+
 // Test 0x1NNN: Jump to 0xNNN.
 func Test1nnn(t *testing.T) {
 	assert := asrt.New(t)

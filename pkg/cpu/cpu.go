@@ -165,6 +165,14 @@ func (c *Cpu) ProcessOpcode() error {
 			c.ClearVram()
 			c.PC += 2
 			break
+
+		case 0x000E:
+			// 0x00EE: Returns from a subroutine.
+			opcodeFound = true
+			c.StackPointer -= 1
+			c.PC = c.Stack[c.StackPointer]
+			c.Stack[c.StackPointer] = 0
+			break
 		}
 
 	case 0x1000:

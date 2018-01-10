@@ -1,5 +1,7 @@
 # CHIP-8 emulator
 
+[![Build Status](https://travis-ci.org/cweagans/chip8.svg?branch=master)](https://travis-ci.org/cweagans/chip8)
+
 As a learning project, I decided to write an emulator in Go. It seems like CHIP-8
 is generally agreed to be the easiest starting point, so I started there.
 

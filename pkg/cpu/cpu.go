@@ -95,8 +95,8 @@ func (c *Cpu) ClearVram() {
 // Runs the CPU until halted.
 func (c *Cpu) Run() {
 
-	// The CPU should run at 60Hz.
-	for range time.Tick(time.Second / c.ClockSpeed) {
+	// c.ClockSpeed defaults to 60 Hz, but this can be adjusted as needed for debugging.
+	for range time.Tick(time.Duration(1000/c.ClockSpeed) * time.Millisecond) {
 		// Get the next opcode.
 		c.GetOp()
 

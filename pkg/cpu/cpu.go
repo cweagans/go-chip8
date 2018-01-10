@@ -47,6 +47,7 @@ func NewCpu(g graphics.Graphics, r []byte, debug bool) *Cpu {
 	cpu.ShouldHalt = false
 	cpu.Debug = debug
 	cpu.ClockSpeed = 60
+	cpu.IndexRegister = 0x0000
 
 	cpu.LoadRom(r)
 
@@ -176,6 +177,12 @@ func (c *Cpu) ProcessOpcode() error {
 		c.StackPointer += 1
 		c.PC = c.Op & 0x0FFF
 		break
+
+	case 0xA000:
+		// 0xANNN: Set index register to 0xNNN.
+		opcodeFound = true
+		c.IndexRegister = c.Op & 0x0FFF
+		c.PC += 2
 	}
 
 	// If we didn't find a way to process the opcode, return an error.

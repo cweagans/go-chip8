@@ -177,3 +177,21 @@ func Test2nnn(t *testing.T) {
 	assert.Equal(uint16(0x234), cpu.PC)
 	assert.Equal(uint16(0x200), cpu.Stack[0])
 }
+
+// Test 0xANNN: Set index register to 0xNNN.
+func TestAnnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0xA2, 0x34}
+	cpu := NewCpu(g, r, false)
+
+	// Make sure that the CPU state is good before processing the opcode.
+	assert.Equal(uint16(0x0000), cpu.IndexRegister)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+
+	assert.NoError(err)
+	assert.Equal(uint16(0x234), cpu.IndexRegister)
+}

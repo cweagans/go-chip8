@@ -9,17 +9,22 @@ import (
 
 // Cpu is the core model of the system.
 type Cpu struct {
-	Graphics     graphics.Graphics
-	Vram         [64 * 32]bool
-	ShouldDraw   bool
-	ClockSpeed   int
-	Memory       [4096]byte
-	PC           uint16
-	Op           uint16
-	ShouldHalt   bool
-	Stack        [16]uint16
-	StackPointer int
-	Debug        bool
+	Graphics      graphics.Graphics
+	Vram          [64 * 32]bool
+	ShouldDraw    bool
+	ClockSpeed    int
+	Memory        [4096]byte
+	PC            uint16
+	Op            uint16
+	ShouldHalt    bool
+	Stack         [16]uint16
+	StackPointer  int
+	Debug         bool
+	Registers     [16]uint8
+	IndexRegister uint16
+	DelayTimer    uint8
+	SoundTimer    uint8
+	Keys          [16]uint8
 }
 
 // UnknownOpcodeError is returned when the CPU encounters an opcode that it does
@@ -32,23 +37,6 @@ type UnknownOpcodeError struct {
 func (uoe *UnknownOpcodeError) Error() string {
 	return fmt.Sprintf("Unknown opcode 0x%X at address 0x%X", uoe.Opcode, uoe.Address)
 }
-
-// type System struct {
-// 	Opcode         uint16
-// 	Memory         [4096]byte
-// 	Registers      [16]byte
-// 	IndexRegister  uint16
-// 	ProgramCounter uint16
-// 	Gfx            [64 * 32]bool
-// 	DelayTimer     byte
-// 	SoundTimer     byte
-// 	Stack          [16]uint16
-// 	StackPointer   byte
-// 	Keys           [16]byte
-// 	ShouldDraw     bool
-// 	Debug          bool
-// 	Halt           bool
-// }
 
 // InitCpu() sets up a new CPU and loads the rom into memory.
 func NewCpu(g graphics.Graphics, r []byte, debug bool) *Cpu {

@@ -17,3 +17,43 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 
 * [How to write an emulator (CHIP-8 interpreter)](http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/)
 * [Wikipedia: CHIP-8](https://en.wikipedia.org/wiki/CHIP-8)
+
+## Opcodes:
+
+| Implemented | Opcode | Description |
+| --- | --- | --- |
+| [ ] | `0x0NNN` |  |
+| [X] | `0x00E0` | Clear the screen |
+| [X] | `0x00EE` | Return from subroutine |
+| [X] | `0x1NNN` | Jump to 0xNNN |
+| [X] | `0x2NNN` | Call subroutine at 0xNNN  |
+| [ ] | `0x3XNN` |  |
+| [ ] | `0x4XNN` |  |
+| [ ] | `0x5XY0` |  |
+| [ ] | `0x6XNN` |  |
+| [ ] | `0x7XNN` |  |
+| [ ] | `0x8XY0` |  |
+| [ ] | `0x8XY1` |  |
+| [ ] | `0x8XY2` |  |
+| [ ] | `0x8XY3` |  |
+| [ ] | `0x8XY4` |  |
+| [ ] | `0x8XY5` |  |
+| [ ] | `0x8XY6` |  |
+| [ ] | `0x8XY7` |  |
+| [ ] | `0x8XYE` |  |
+| [ ] | `0x9XY0` |  |
+| [X] | `0xANNN` | Set index register to 0xNNN |
+| [ ] | `0xBNNN` |  |
+| [ ] | `0xCXNN` |  |
+| [ ] | `0xDXYN` |  |
+| [ ] | `0xEX9E` |  |
+| [ ] | `0xEXA1` |  |
+| [ ] | `0xFX07` |  |
+| [ ] | `0xFX0A` |  |
+| [ ] | `0xFX15` |  |
+| [ ] | `0xFX18` |  |
+| [ ] | `0xFX1E` |  |
+| [ ] | `0xFX29` |  |
+| [ ] | `0xFX33` |  |
+| [ ] | `0xFX55` |  |
+| [ ] | `0xFX65` |  |

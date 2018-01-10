@@ -20,7 +20,7 @@ var (
 func init() {
 	flag.StringVar(&GraphicsMode, "ui", "raylib", "Which UI should the emulator use? Options: raylib (default), termbox.")
 	flag.BoolVar(&Debug, "debug", false, "Set debug to true if you want to log CPU internals")
-	flag.IntVar(&ClockSpeed, "clock-speed", "60", "Set the CPU clock speed (in Hertz).")
+	flag.IntVar(&ClockSpeed, "clock-speed", 60, "Set the CPU clock speed (in Hertz).")
 	flag.Parse()
 
 	if len(os.Args) < 2 {

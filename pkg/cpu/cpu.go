@@ -170,7 +170,7 @@ func (c *Cpu) ProcessOpcode() error {
 		break
 
 	case 0x2000:
-		// 0x2NNN: Call subrouting at 0xNNN
+		// 0x2NNN: Call subroutine at 0xNNN
 		opcodeFound = true
 		c.Stack[c.StackPointer] = c.PC
 		c.StackPointer += 1

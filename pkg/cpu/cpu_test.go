@@ -157,7 +157,7 @@ func Test1nnn(t *testing.T) {
 	assert.Equal(uint16(0x234), cpu.PC)
 }
 
-// Test 0x2NNN: Call subrouting at 0xNNN.
+// Test 0x2NNN: Call subroutine at 0xNNN.
 func Test2nnn(t *testing.T) {
 	assert := asrt.New(t)
 

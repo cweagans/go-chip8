@@ -149,7 +149,7 @@ func (c *Cpu) ProcessOpcode() error {
 	case 0x0000:
 		switch c.Op & 0x000F {
 		case 0x0000:
-			// 0x00E0: Clear the screen and advance to the next opcode.
+			// 0x00E0: Clear the screen.
 			opcodeFound = true
 			c.ClearVram()
 			c.PC += 2

@@ -40,10 +40,11 @@ func main() {
 		fmt.Println("Could not open specified ROM file: " + err.Error())
 	}
 
-	// create cpu package
-	_ = cpu.NewCpu(g, rom, Debug)
+	// Create a new CPU.
+	c := cpu.NewCpu(g, rom, Debug)
 
-	// add termbox graphics implementation + tests for output
+	// Run the CPU.
+	c.Run()
 }
 
 func loadRom(filename string) ([]byte, error) {

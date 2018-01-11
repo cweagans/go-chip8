@@ -27,7 +27,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 | ✅ | `0x00EE` | Return from subroutine |
 | ✅ | `0x1NNN` | Jump to 0xNNN |
 | ✅ | `0x2NNN` | Call subroutine at 0xNNN  |
-| ❌ | `0x3XNN` | Skip next instruction if `VX == NN` |
+| ✅ | `0x3XNN` | Skip next instruction if `VX == NN` |
 | ❌ | `0x4XNN` | Skip next instruction if `VX != NN` |
 | ❌ | `0x5XY0` | Skip next instruction if `VX == VY` |
 | ❌ | `0x6XNN` | Set `VX` to `NN` |

@@ -178,6 +178,33 @@ func Test2nnn(t *testing.T) {
 	assert.Equal(uint16(0x200), cpu.Stack[0])
 }
 
+// Test 0x3XNN: Skip next instruction if VX == NN.
+func Test3xnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x3A, 0x22}
+	cpu := NewCpu(g, r, false)
+
+	// Check that the program counter advances as normal if the register is not
+	// set to the specified value.
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x202), cpu.PC)
+
+	// Set the register value and back up the program counter.
+	cpu.Registers[int(0xA)] = uint8(22)
+	cpu.PC = uint16(0x200)
+
+	// Check that the program counter advances by 4 bytes if the register matches
+	// the specified value.
+	cpu.GetOp()
+	err = cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x204), cpu.PC)
+}
+
 // Test 0xANNN: Set index register to 0xNNN.
 func TestAnnn(t *testing.T) {
 	assert := asrt.New(t)

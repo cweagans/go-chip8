@@ -104,9 +104,9 @@ func (c *Cpu) Run() {
 		}
 
 		// If ShouldDraw has been set, we need to update the screen.
-		if c.ShouldDraw {
-			c.Graphics.Draw(c.Vram)
-		}
+		// if c.ShouldDraw {
+		// 	c.Graphics.Draw(c.Vram)
+		// }
 
 		// @TODO: Get input state.
 	}
@@ -190,6 +190,18 @@ func (c *Cpu) ProcessOpcode() error {
 		}
 		break
 
+	case 0x4000:
+		// 0x4XNN: Skip next instruction if VX != NN.
+		opcodeFound = true
+		rval := uint8(c.Op & 0x00FF)
+		r := int((c.Op >> 8) & 0x0F)
+		if rval != c.Registers[r] {
+			c.PC += 4
+		} else {
+			c.PC += 2
+		}
+		break
+
 	case 0x6000:
 		// 0x6XNN: Set VX to NN.
 		opcodeFound = true
@@ -204,6 +216,21 @@ func (c *Cpu) ProcessOpcode() error {
 		opcodeFound = true
 		c.IndexRegister = c.Op & 0x0FFF
 		c.PC += 2
+
+	case 0xD000:
+		// 0xDXYN: Draw a sprite at (X, Y) that is N rows tall.
+		opcodeFound = true
+		c.ShouldDraw = true
+
+		// impl notes:
+		// vram should be switched to an array of int64
+		// drawing can just be bitwise OR (xor for collision detection?)
+		// tricky part will be converting from an int to drawable data
+		// might be able to reuse the existing array of bool -- int -> bits -> bools -> Graphics
+		// bit kludgy, but it should work.
+
+		break
+
 	}
 
 	// If we didn't find a way to process the opcode, return an error.

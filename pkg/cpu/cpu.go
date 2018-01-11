@@ -178,6 +178,18 @@ func (c *Cpu) ProcessOpcode() error {
 		c.PC = c.Op & 0x0FFF
 		break
 
+	case 0x3000:
+		// 0x3XNN: Skip next instruction if VX == NN.
+		opcodeFound = true
+		rval := uint8(c.Op & 0x00FF)
+		r := int((c.Op >> 8) & 0x0F)
+		if rval == c.Registers[r] {
+			c.PC += 4
+		} else {
+			c.PC += 2
+		}
+		break
+
 	case 0xA000:
 		// 0xANNN: Set index register to 0xNNN.
 		opcodeFound = true

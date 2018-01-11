@@ -194,7 +194,7 @@ func Test3xnn(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 
 	// Set the register value and back up the program counter.
-	cpu.Registers[int(0xA)] = uint8(22)
+	cpu.Registers[0xA] = uint8(0x22)
 	cpu.PC = uint16(0x200)
 
 	// Check that the program counter advances by 4 bytes if the register matches

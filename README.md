@@ -30,7 +30,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 | ✅ | `0x3XNN` | Skip next instruction if `VX == NN` |
 | ❌ | `0x4XNN` | Skip next instruction if `VX != NN` |
 | ❌ | `0x5XY0` | Skip next instruction if `VX == VY` |
-| ❌ | `0x6XNN` | Set `VX` to `NN` |
+| ✅ | `0x6XNN` | Set `VX` to `NN` |
 | ❌ | `0x7XNN` | Add `NN` to `VX` (carry flag is not changed) |
 | ❌ | `0x8XY0` | Set `VX` to the value of `VY` |
 | ❌ | `0x8XY1` | Set `VX` to `VX \| VY` (bitwise OR) |

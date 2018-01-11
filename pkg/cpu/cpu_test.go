@@ -205,6 +205,20 @@ func Test3xnn(t *testing.T) {
 	assert.Equal(uint16(0x204), cpu.PC)
 }
 
+// Test 0x6XNN: Set VX to NN.
+func Test6xnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x6A, 0xFF}
+	cpu := NewCpu(g, r, false)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0xFF), cpu.Registers[0xA])
+}
+
 // Test 0xANNN: Set index register to 0xNNN.
 func TestAnnn(t *testing.T) {
 	assert := asrt.New(t)

@@ -190,6 +190,15 @@ func (c *Cpu) ProcessOpcode() error {
 		}
 		break
 
+	case 0x6000:
+		// 0x6XNN: Set VX to NN.
+		opcodeFound = true
+		val := uint8(c.Op & 0x00FF)
+		r := int((c.Op >> 8) & 0x0F)
+		c.Registers[r] = val
+		c.PC += 2
+		break
+
 	case 0xA000:
 		// 0xANNN: Set index register to 0xNNN.
 		opcodeFound = true

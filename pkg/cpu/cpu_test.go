@@ -271,6 +271,7 @@ func Test6xnn(t *testing.T) {
 	err := cpu.ProcessOpcode()
 	assert.NoError(err)
 	assert.Equal(uint8(0xFF), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
 }
 
 // Test 0x7XNN: Add NN to VX.
@@ -286,6 +287,7 @@ func Test7xnn(t *testing.T) {
 	err := cpu.ProcessOpcode()
 	assert.NoError(err)
 	assert.Equal(uint8(0x24), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
 }
 
 // Test 0xANNN: Set index register to 0xNNN.

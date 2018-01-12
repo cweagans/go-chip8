@@ -1,6 +1,9 @@
 package graphics
 
 import (
+	"fmt"
+	"math"
+
 	"github.com/gen2brain/raylib-go/raylib"
 	termbox "github.com/nsf/termbox-go"
 )
@@ -45,19 +48,21 @@ func (r Raylib) Init() {
 }
 
 func (r Raylib) Draw(buf [32]int64) {
+	pixels := ConvertVramToBools(buf)
+
 	raylib.BeginDrawing()
 	raylib.ClearBackground(raylib.Black)
 	for i := 0; i < 64*32; i++ {
-		// if buf[i] {
-		// 	xrootpos := (i % 64)
-		// 	yrootpos := math.Floor(float64((i - (i % 64)) / 64))
+		if pixels[i] {
+			xrootpos := (i % 64)
+			yrootpos := math.Floor(float64((i - (i % 64)) / 64))
 
-		// 	// Everything is 16x so that we will be able to see it on modern displays.
-		// 	yrootpos = yrootpos * 8
-		// 	xrootpos = xrootpos * 8
+			// Everything is 8x so that we will be able to see it on modern displays.
+			yrootpos = yrootpos * 8
+			xrootpos = xrootpos * 8
 
-		// 	raylib.DrawRectangle(int32(xrootpos), int32(yrootpos), 8, 8, raylib.White)
-		// }
+			raylib.DrawRectangle(int32(xrootpos), int32(yrootpos), 8, 8, raylib.White)
+		}
 	}
 	raylib.EndDrawing()
 }
@@ -90,3 +95,32 @@ type Noop struct{}
 func (n Noop) Init()              {}
 func (n Noop) Draw(buf [32]int64) {}
 func (n Noop) Shutdown()          {}
+
+// Convert an array of int64 values to an array of booleans corresponding to the
+// bits that make up the integer value. This is mostly to help with the raylib
+// graphics, as it was implemented before Vram was switched to an array of int64
+// values.
+func ConvertVramToBools(vram [32]int64) [64 * 32]bool {
+
+	var pixels [64 * 32]bool
+	counter := 0
+	for row := 0; row < 32; row++ {
+		rowInt := vram[row]
+		rowBinary := fmt.Sprintf("%064b", rowInt)
+
+		for _, val := range []rune(rowBinary) {
+			switch string(val) {
+			case "0":
+				pixels[counter] = false
+				break
+			case "1":
+				pixels[counter] = true
+				break
+			}
+
+			counter += 1
+		}
+	}
+
+	return pixels
+}

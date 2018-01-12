@@ -28,6 +28,7 @@ func GetGraphics(graphicsType string) Graphics {
 		g.Init()
 		return g
 	case "raylib":
+		fallthrough
 	default:
 		g := &Raylib{}
 		g.Init()

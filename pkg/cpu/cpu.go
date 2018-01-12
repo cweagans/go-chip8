@@ -105,9 +105,9 @@ func (c *Cpu) Run() {
 		}
 
 		// If ShouldDraw has been set, we need to update the screen.
-		// if c.ShouldDraw {
-		// 	c.Graphics.Draw(c.Vram)
-		// }
+		if c.ShouldDraw {
+			c.Graphics.Draw(c.Vram)
+		}
 
 		// @TODO: Get input state.
 	}

@@ -9,8 +9,9 @@ import (
 
 // Cpu is the core model of the system.
 type Cpu struct {
+	// Vram          [64 * 32]bool
 	Graphics      graphics.Graphics
-	Vram          [64 * 32]bool
+	Vram          [32]int64
 	ShouldDraw    bool
 	ClockSpeed    int
 	Memory        [4096]byte
@@ -74,8 +75,8 @@ func (c *Cpu) LoadRom(r []byte) {
 
 // Clear Vram.
 func (c *Cpu) ClearVram() {
-	for g := 0; g < (64 * 32); g++ {
-		c.Vram[g] = false
+	for g := 0; g < 32; g++ {
+		c.Vram[g] = 0x00000000
 	}
 
 	c.ShouldDraw = true

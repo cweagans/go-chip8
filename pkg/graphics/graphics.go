@@ -1,8 +1,6 @@
 package graphics
 
 import (
-	"math"
-
 	"github.com/gen2brain/raylib-go/raylib"
 	termbox "github.com/nsf/termbox-go"
 )
@@ -11,7 +9,7 @@ import (
 // agnostic way.
 type Graphics interface {
 	Init()
-	Draw([64 * 32]bool)
+	Draw([32]int64)
 	Shutdown()
 }
 
@@ -46,20 +44,20 @@ func (r Raylib) Init() {
 	raylib.EndDrawing()
 }
 
-func (r Raylib) Draw(buf [64 * 32]bool) {
+func (r Raylib) Draw(buf [32]int64) {
 	raylib.BeginDrawing()
 	raylib.ClearBackground(raylib.Black)
 	for i := 0; i < 64*32; i++ {
-		if buf[i] {
-			xrootpos := (i % 64)
-			yrootpos := math.Floor(float64((i - (i % 64)) / 64))
+		// if buf[i] {
+		// 	xrootpos := (i % 64)
+		// 	yrootpos := math.Floor(float64((i - (i % 64)) / 64))
 
-			// Everything is 16x so that we will be able to see it on modern displays.
-			yrootpos = yrootpos * 8
-			xrootpos = xrootpos * 8
+		// 	// Everything is 16x so that we will be able to see it on modern displays.
+		// 	yrootpos = yrootpos * 8
+		// 	xrootpos = xrootpos * 8
 
-			raylib.DrawRectangle(int32(xrootpos), int32(yrootpos), 8, 8, raylib.White)
-		}
+		// 	raylib.DrawRectangle(int32(xrootpos), int32(yrootpos), 8, 8, raylib.White)
+		// }
 	}
 	raylib.EndDrawing()
 }
@@ -78,7 +76,7 @@ func (t Termbox) Init() {
 	}
 }
 
-func (t Termbox) Draw(buf [64 * 32]bool) {
+func (t Termbox) Draw(buf [32]int64) {
 	panic("Termbox is unimplemented.")
 }
 
@@ -89,6 +87,6 @@ func (t Termbox) Shutdown() {
 // Noop will skip drawing altogether.
 type Noop struct{}
 
-func (n Noop) Init()                  {}
-func (n Noop) Draw(buf [64 * 32]bool) {}
-func (n Noop) Shutdown()              {}
+func (n Noop) Init()              {}
+func (n Noop) Draw(buf [32]int64) {}
+func (n Noop) Shutdown()          {}

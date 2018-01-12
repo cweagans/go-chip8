@@ -31,25 +31,25 @@ func TestClearGfx(t *testing.T) {
 	cpu := NewCpu(g, r, false)
 
 	// CPU should init with an empty Gfx buffer
-	for g := 0; g < (64 * 32); g++ {
-		assert.False(cpu.Vram[g])
+	for g := 0; g < 32; g++ {
+		assert.Equal(int64(0x00000000), cpu.Vram[g])
 	}
 
 	// CPU should init with ShouldDraw = false
 	assert.False(cpu.ShouldDraw)
 
-	// Set some pixels to true.
-	cpu.Vram[1] = true
-	cpu.Vram[2] = true
-	cpu.Vram[3] = true
-	cpu.Vram[4] = true
+	// Turn on some pixels.
+	cpu.Vram[1] = 0x00000001
+	cpu.Vram[2] = 0x00000001
+	cpu.Vram[3] = 0x00000001
+	cpu.Vram[4] = 0x00000001
 
 	// Clear the Gfx buffer
 	cpu.ClearVram()
 
 	// Make sure everything is off again
-	for g := 0; g < (64 * 32); g++ {
-		assert.False(cpu.Vram[g])
+	for g := 0; g < 32; g++ {
+		assert.Equal(int64(0x00000000), cpu.Vram[g])
 	}
 
 	// After clearing the Gfx buffer, the CPU should know to draw to the screen.
@@ -98,11 +98,11 @@ func Test00e0(t *testing.T) {
 	// CPU should init with ShouldDraw = false
 	assert.False(cpu.ShouldDraw)
 
-	// Set some pixels to true.
-	cpu.Vram[1] = true
-	cpu.Vram[2] = true
-	cpu.Vram[3] = true
-	cpu.Vram[4] = true
+	// Turn on some pixels.
+	cpu.Vram[1] = 0x00000001
+	cpu.Vram[2] = 0x00000001
+	cpu.Vram[3] = 0x00000001
+	cpu.Vram[4] = 0x00000001
 
 	// Load the opcode, and then process it.
 	cpu.GetOp()
@@ -110,8 +110,8 @@ func Test00e0(t *testing.T) {
 
 	assert.NoError(err)
 
-	for g := 0; g < (64 * 32); g++ {
-		assert.False(cpu.Vram[g])
+	for g := 0; g < 32; g++ {
+		assert.Equal(int64(0x00000000), cpu.Vram[g])
 	}
 	assert.True(cpu.ShouldDraw)
 }

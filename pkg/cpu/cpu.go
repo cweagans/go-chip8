@@ -231,6 +231,7 @@ func (c *Cpu) ProcessOpcode() error {
 		r := int((c.Op >> 8) & 0x0F)
 		val := uint8(c.Op & 0x00FF)
 		c.Registers[r] += val
+		c.PC += 2
 		break
 
 	case 0xA000:

@@ -236,13 +236,6 @@ func (c *Cpu) ProcessOpcode() error {
 		opcodeFound = true
 		c.ShouldDraw = true
 
-		// impl notes:
-		// vram should be switched to an array of int64
-		// drawing can just be bitwise OR (xor for collision detection?)
-		// tricky part will be converting from an int to drawable data
-		// might be able to reuse the existing array of bool -- int -> bits -> bools -> Graphics
-		// bit kludgy, but it should work.
-
 		break
 
 	}

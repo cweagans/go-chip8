@@ -43,6 +43,9 @@ func main() {
 	// Create a new CPU.
 	c := cpu.NewCpu(g, rom, Debug)
 
+	// Set the clock speed based on input.
+	c.SetClockSpeed(ClockSpeed)
+
 	// Run the CPU.
 	c.Run()
 }

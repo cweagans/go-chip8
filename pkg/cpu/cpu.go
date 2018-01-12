@@ -238,6 +238,7 @@ func (c *Cpu) ProcessOpcode() error {
 		opcodeFound = true
 		c.IndexRegister = c.Op & 0x0FFF
 		c.PC += 2
+		break
 
 	case 0xD000:
 		// 0xDXYN: Draw a sprite at (VX, VY) that is N rows tall.

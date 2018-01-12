@@ -21,13 +21,13 @@ func init() {
 	flag.StringVar(&GraphicsMode, "ui", "raylib", "Which UI should the emulator use? Options: raylib (default), termbox.")
 	flag.BoolVar(&Debug, "debug", false, "Set debug to true if you want to log CPU internals")
 	flag.IntVar(&ClockSpeed, "clock-speed", 60, "Set the CPU clock speed (in Hertz).")
+	flag.StringVar(&RomFile, "rom", "", "Set the ROM filename that the emulator will load.")
 	flag.Parse()
 
-	if len(os.Args) < 2 {
-		fmt.Println("ROM file argument is required.")
+	if RomFile == "" {
+		fmt.Println("-rom flag is required.")
 		os.Exit(1)
 	}
-	RomFile = os.Args[1]
 }
 
 func main() {

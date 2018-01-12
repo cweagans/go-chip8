@@ -307,3 +307,18 @@ func TestAnnn(t *testing.T) {
 	assert.NoError(err)
 	assert.Equal(uint16(0x234), cpu.IndexRegister)
 }
+
+// Test 0xCXNN: Set VX to rand & NN.
+func TestCxnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0xCA, 0x12}
+	cpu := NewCpu(g, r, false)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.NotEqual(uint8(0x0), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
+}

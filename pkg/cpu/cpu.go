@@ -2,6 +2,7 @@ package cpu
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/cweagans/chip8/pkg/graphics"
@@ -238,6 +239,16 @@ func (c *Cpu) ProcessOpcode() error {
 		// 0xANNN: Set index register to 0xNNN.
 		opcodeFound = true
 		c.IndexRegister = c.Op & 0x0FFF
+		c.PC += 2
+		break
+
+	case 0xC000:
+		// 0xCXNN: Set VX to the result of a bitwise AND on a random number and NN.
+		opcodeFound = true
+		reg := int((c.Op >> 8) & 0x0F)
+		val := uint8(c.Op & 0x00FF)
+		r := rand.Intn(255)
+		c.Registers[reg] = val & uint8(r)
 		c.PC += 2
 		break
 

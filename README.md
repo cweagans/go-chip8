@@ -45,7 +45,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 | ❌ | `0x9XY0` | Skip the next instruction if `VX` doesn't equal `VY`. |
 | ✅ | `0xANNN` | Set index register to 0xNNN |
 | ❌ | `0xBNNN` | Jump to the address `NNN` plus `V0` |
-| ❌ | `0xCXNN` | Set `VX` to the result of a bitwise and operation on a random number and `NN` |
+| ✅ | `0xCXNN` | Set `VX` to the result of a bitwise and operation on a random number and `NN` |
 | ✅ (partial) | `0xDXYN` | Draw a sprite at coordinate (`VX`, `VY`) that has a width of 8 pixels and a height of `N` pixels. Each row is read as bit-coded starting from the index register, I. I doesn't change after the execution of this instruction. `VF` is set to 1 if any screen pixels are flipped from set to unset when the sprite is drawn, and to 0 if that doesn't happen. |
 | ❌ | `0xEX9E` | Skip the next instruction if the key stored in `VX` is pressed. |
 | ❌ | `0xEXA1` | Skip the next instruction if the key stored in `VX` is not pressed. |

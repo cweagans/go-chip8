@@ -232,9 +232,33 @@ func (c *Cpu) ProcessOpcode() error {
 		c.PC += 2
 
 	case 0xD000:
-		// 0xDXYN: Draw a sprite at (X, Y) that is N rows tall.
+		// 0xDXYN: Draw a sprite at (VX, VY) that is N rows tall.
 		opcodeFound = true
+
+		// This is needed so that the CPU knows to draw on this cycle.
 		c.ShouldDraw = true
+
+		// Get the registers for the draw coordinates.
+		xreg := int((c.Op >> 8) & 0x0F)
+		yreg := int((c.Op >> 4) & 0xF)
+		rows := int(c.Op & 0x000F)
+
+		// Get the values of the registers.
+		xval := c.Registers[xreg]
+		yval := c.Registers[yreg]
+
+		// x = 0 should be 8 bits shifted 56 digits left
+		xshift := uint(56 - int(xval))
+
+		// "Draw" the sprite to vram by OR'ing a bitshifted byte into place.
+		for b := 0; b < rows; b += 1 {
+			spriteByte := int64(c.Memory[c.IndexRegister+uint16(b)])
+			spriteByte = spriteByte << xshift
+			c.Vram[yval+uint8(b)] = c.Vram[yval+uint8(b)] | spriteByte
+		}
+
+		// Finally, increment the program counter.
+		c.PC += 2
 
 		break
 

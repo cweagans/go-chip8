@@ -232,6 +232,33 @@ func Test4xnn(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 }
 
+// Test 0x5XY0: Skip next instruction if VX == VY.
+func Test5xnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x5A, 0x10}
+	cpu := NewCpu(g, r, false)
+
+	// Check that the program counter advances by 4 bytes since the registers
+	// match by default (0x00)
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x204), cpu.PC)
+
+	// Move the PC back and change one of the register values.
+	cpu.PC = uint16(0x200)
+	cpu.Registers[int(0xA)] = uint8(0xFF)
+
+	// Check that the program counter advances by 2 bytes when the registers
+	// don't match.
+	cpu.GetOp()
+	err = cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x202), cpu.PC)
+}
+
 // Test 0x6XNN: Set VX to NN.
 func Test6xnn(t *testing.T) {
 	assert := asrt.New(t)

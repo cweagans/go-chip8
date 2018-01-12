@@ -202,6 +202,19 @@ func (c *Cpu) ProcessOpcode() error {
 		}
 		break
 
+	case 0x5000:
+		// 0x5XY0: Skip next instruction if VX == VY.
+		opcodeFound = true
+		r1 := int((c.Op >> 8) & 0x0F)
+		r2 := int((c.Op >> 4) & 0xF)
+
+		if c.Registers[r1] == c.Registers[r2] {
+			c.PC += 4
+		} else {
+			c.PC += 2
+		}
+		break
+
 	case 0x6000:
 		// 0x6XNN: Set VX to NN.
 		opcodeFound = true

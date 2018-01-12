@@ -300,6 +300,13 @@ func (c *Cpu) ProcessOpcode() error {
 			c.DelayTimer = c.Registers[reg]
 			c.PC += 2
 			break
+		case 0x0018:
+			// 0xFX18: Set the sound timer to the value of VX.
+			opcodeFound = true
+			reg := int((c.Op >> 8) & 0x0F)
+			c.SoundTimer = c.Registers[reg]
+			c.PC += 2
+			break
 		}
 		break
 

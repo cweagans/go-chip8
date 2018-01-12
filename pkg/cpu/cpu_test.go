@@ -338,3 +338,19 @@ func TestFx15(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 	assert.Equal(uint8(0xFF), cpu.DelayTimer)
 }
+
+// Test 0xFX18: Set sound timer to value of VX.
+func TestFx18(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0xFA, 0x18}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0xFF)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x202), cpu.PC)
+	assert.Equal(uint8(0xFF), cpu.SoundTimer)
+}

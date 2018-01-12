@@ -17,6 +17,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 
 * [How to write an emulator (CHIP-8 interpreter)](http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/)
 * [Wikipedia: CHIP-8](https://en.wikipedia.org/wiki/CHIP-8)
+* [Cowgod's CHIP-8 tech reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
 
 ## Opcodes:
 

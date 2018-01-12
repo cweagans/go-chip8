@@ -283,6 +283,18 @@ func (c *Cpu) ProcessOpcode() error {
 
 		break
 
+	case 0xF000:
+		switch c.Op & 0x00FF {
+		case 0x0015:
+			// 0xFX15: Set the delay timer to the value of VX.
+			opcodeFound = true
+			reg := int((c.Op >> 8) & 0x0F)
+			c.DelayTimer = c.Registers[reg]
+			c.PC += 2
+			break
+		}
+		break
+
 	}
 
 	// If we didn't find a way to process the opcode, return an error.

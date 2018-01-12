@@ -322,3 +322,19 @@ func TestCxnn(t *testing.T) {
 	assert.NotEqual(uint8(0x0), cpu.Registers[0xA])
 	assert.Equal(uint16(0x202), cpu.PC)
 }
+
+// Test 0xFX15: Set delay timer to value of VX.
+func TestFx15(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0xFA, 0x15}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0xFF)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint16(0x202), cpu.PC)
+	assert.Equal(uint8(0xFF), cpu.DelayTimer)
+}

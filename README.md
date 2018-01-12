@@ -51,7 +51,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 | ❌ | `0xEXA1` | Skip the next instruction if the key stored in `VX` is not pressed. |
 | ❌ | `0xFX07` | Set `VX` to the value of the delay timer. |
 | ❌ | `0xFX0A` | A key press is awaited and then stored in `VX` (blocking operation - all instructions are halted until the next key event) |
-| ❌ | `0xFX15` | Set the delay timer to the value of `VX` |
+| ✅ | `0xFX15` | Set the delay timer to the value of `VX` |
 | ❌ | `0xFX18` | Set the sound timer to the value of `VX` |
 | ❌ | `0xFX1E` | Add the value of `VX` to the index register |
 | ❌ | `0xFX29` | Set `I` to the location of the sprite for the character in `VX`. Characters 0-F (in hex) are represented by a 4x5 font. |

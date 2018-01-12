@@ -111,6 +111,14 @@ func (c *Cpu) Run() {
 		}
 
 		// @TODO: Get input state.
+
+		// If either timer is > 0, decrease them by 1.
+		if c.DelayTimer > 0 {
+			c.DelayTimer -= 1
+		}
+		if c.SoundTimer > 0 {
+			c.SoundTimer -= 1
+		}
 	}
 }
 

@@ -273,6 +273,21 @@ func Test6xnn(t *testing.T) {
 	assert.Equal(uint8(0xFF), cpu.Registers[0xA])
 }
 
+// Test 0x7XNN: Add NN to VX.
+func Test7xnn(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x7A, 0x12}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0x12)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0x24), cpu.Registers[0xA])
+}
+
 // Test 0xANNN: Set index register to 0xNNN.
 func TestAnnn(t *testing.T) {
 	assert := asrt.New(t)

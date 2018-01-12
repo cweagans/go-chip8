@@ -225,6 +225,14 @@ func (c *Cpu) ProcessOpcode() error {
 		c.PC += 2
 		break
 
+	case 0x7000:
+		// 0x7XNN: Add NN to VX (carry flag not changed).
+		opcodeFound = true
+		r := int((c.Op >> 8) & 0x0F)
+		val := uint8(c.Op & 0x00FF)
+		c.Registers[r] += val
+		break
+
 	case 0xA000:
 		// 0xANNN: Set index register to 0xNNN.
 		opcodeFound = true

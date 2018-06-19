@@ -243,6 +243,19 @@ func (c *Cpu) ProcessOpcode() error {
 		c.PC += 2
 		break
 
+	case 0x9000:
+		// 0x9XY0: Skip the next instruction if VX != VY
+		opcodeFound = true
+		r1 := int((c.Op >> 8) & 0x0F)
+		r2 := int((c.Op >> 4) & 0xF)
+
+		if c.Registers[r1] != c.Registers[r2] {
+			c.PC += 4
+		} else {
+			c.PC += 2
+		}
+		break
+
 	case 0xA000:
 		// 0xANNN: Set index register to 0xNNN.
 		opcodeFound = true

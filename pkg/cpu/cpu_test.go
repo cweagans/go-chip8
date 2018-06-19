@@ -306,6 +306,40 @@ func Test8XY0(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 }
 
+// Test 0x8XY1: Set VX to VX | VY (bitwise OR)
+func Test8XY1(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x8A, 0xB1}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0x10)
+	cpu.Registers[0xB] = uint8(0x01)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0x11), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
+}
+
+// Test 0x8XY2: Set VX to VX & VY (bitwise AND)
+func Test8XY2(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x8A, 0xB2}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0x10)
+	cpu.Registers[0xB] = uint8(0x01)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0x00), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
+}
+
 // Test 0x9XY0: Skip next instruction if VX != VY.
 func Test9xnn(t *testing.T) {
 	assert := asrt.New(t)

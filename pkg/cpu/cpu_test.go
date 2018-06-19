@@ -340,6 +340,23 @@ func Test8XY2(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 }
 
+// Test 0x8XY3: Set VX to VX xor VY
+func Test8XY3(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x8A, 0xB3}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0xA] = uint8(0x10)
+	cpu.Registers[0xB] = uint8(0x11)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0x01), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
+}
+
 // Test 0x9XY0: Skip next instruction if VX != VY.
 func Test9xnn(t *testing.T) {
 	assert := asrt.New(t)

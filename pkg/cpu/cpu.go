@@ -273,6 +273,15 @@ func (c *Cpu) ProcessOpcode() error {
 			c.PC += 2
 			break
 
+		case 0x0003:
+			// 0x8XY3: Set VX to VX xor VY
+			opcodeFound = true
+			r1 := int((c.Op >> 8) & 0x0F)
+			r2 := int((c.Op >> 4) & 0xF)
+			c.Registers[r1] = (c.Registers[r1] ^ c.Registers[r2])
+			c.PC += 2
+			break
+
 		}
 
 	case 0x9000:

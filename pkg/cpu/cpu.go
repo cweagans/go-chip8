@@ -243,6 +243,20 @@ func (c *Cpu) ProcessOpcode() error {
 		c.PC += 2
 		break
 
+	case 0x8000:
+		// Look at the last four bits to determine what the op is.
+		switch c.Op & 0x000F {
+		case 0x0000:
+			// 0x8XY0: Set VX to the value of VY.
+			opcodeFound = true
+			r1 := int((c.Op >> 8) & 0x0F)
+			r2 := int((c.Op >> 4) & 0xF)
+			c.Registers[r1] = c.Registers[r2]
+			c.PC += 2
+			break
+
+		}
+
 	case 0x9000:
 		// 0x9XY0: Skip the next instruction if VX != VY
 		opcodeFound = true

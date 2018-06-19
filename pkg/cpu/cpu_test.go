@@ -290,6 +290,22 @@ func Test7xnn(t *testing.T) {
 	assert.Equal(uint16(0x202), cpu.PC)
 }
 
+// Test 0x8XY0: Set VX to the value of VY.
+func Test8XY0(t *testing.T) {
+	assert := asrt.New(t)
+
+	g := &graphics.Noop{}
+	r := []byte{0x8A, 0x10}
+	cpu := NewCpu(g, r, false)
+	cpu.Registers[0x1] = uint8(0x55)
+
+	cpu.GetOp()
+	err := cpu.ProcessOpcode()
+	assert.NoError(err)
+	assert.Equal(uint8(0x55), cpu.Registers[0xA])
+	assert.Equal(uint16(0x202), cpu.PC)
+}
+
 // Test 0x9XY0: Skip next instruction if VX != VY.
 func Test9xnn(t *testing.T) {
 	assert := asrt.New(t)

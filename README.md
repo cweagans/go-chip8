@@ -42,7 +42,7 @@ can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?
 | ❌ | `0x8XY6` | Shift `VY` right by one and copy the result to `VX`. `VF` is set to the value of the least significant bit of `VY` before the shift. |
 | ❌ | `0x8XY7` | Set `VX` to `VY - VX`. `VF` is set to 0 when there's a borrow and 1 when there isn't. |
 | ❌ | `0x8XYE` | Shift `VY` left by one and copy the result to `VX`. `VF` is set to the value of the least significant bit of `VY` before the shift. |
-| ❌ | `0x9XY0` | Skip the next instruction if `VX` doesn't equal `VY`. |
+| ✅ | `0x9XY0` | Skip the next instruction if `VX` doesn't equal `VY`. |
 | ✅ | `0xANNN` | Set index register to 0xNNN |
 | ❌ | `0xBNNN` | Jump to the address `NNN` plus `V0` |
 | ✅ | `0xCXNN` | Set `VX` to the result of a bitwise and operation on a random number and `NN` |

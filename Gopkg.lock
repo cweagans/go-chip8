@@ -10,14 +10,6 @@
   version = "v1.1.0"
 
 [[projects]]
-  branch = "master"
-  digest = "1:29759426e722f2a5b766e1b17ed3c94b89678c6b1cbee1c352562fde443eede2"
-  name = "github.com/gen2brain/raylib-go"
-  packages = ["raylib"]
-  pruneopts = ""
-  revision = "eec2b1e49469188288302ed9c5a1da0a1e822ff0"
-
-[[projects]]
   digest = "1:81e673df85e765593a863f67cba4544cf40e8919590f04d67664940786c2b61a"
   name = "github.com/mattn/go-runewidth"
   packages = ["."]
@@ -61,7 +53,6 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/gen2brain/raylib-go/raylib",
     "github.com/nsf/termbox-go",
     "github.com/stretchr/testify/assert",
     "github.com/veandco/go-sdl2/sdl",

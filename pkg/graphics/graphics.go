@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/gen2brain/raylib-go/raylib"
 	termbox "github.com/nsf/termbox-go"
 	"github.com/veandco/go-sdl2/sdl"
 )
@@ -29,13 +28,9 @@ func GetGraphics(graphicsType string) Graphics {
 		g.Init()
 		return g
 	case "sdl":
-		g := &Sdl{}
-		g.Init()
-		return g
-	case "raylib":
 		fallthrough
 	default:
-		g := &Raylib{}
+		g := &Sdl{}
 		g.Init()
 		return g
 	}
@@ -112,40 +107,6 @@ func (s Sdl) Draw(buf [32]int64) {
 func (s Sdl) Shutdown() {
 	sdl.Quit()
 	s.Window.Destroy()
-}
-
-// Raylib will draw emulator output in a separate GUI window.
-type Raylib struct{}
-
-func (r Raylib) Init() {
-	raylib.InitWindow(512, 256, "Chip8")
-	raylib.BeginDrawing()
-	raylib.ClearBackground(raylib.Black)
-	raylib.EndDrawing()
-}
-
-func (r Raylib) Draw(buf [32]int64) {
-	pixels := ConvertVramToBools(buf)
-
-	raylib.BeginDrawing()
-	raylib.ClearBackground(raylib.Black)
-	for i := 0; i < 64*32; i++ {
-		if pixels[i] {
-			xrootpos := (i % 64)
-			yrootpos := math.Floor(float64((i - (i % 64)) / 64))
-
-			// Everything is 8x so that we will be able to see it on modern displays.
-			yrootpos = yrootpos * 8
-			xrootpos = xrootpos * 8
-
-			raylib.DrawRectangle(int32(xrootpos), int32(yrootpos), 8, 8, raylib.White)
-		}
-	}
-	raylib.EndDrawing()
-}
-
-func (r Raylib) Shutdown() {
-	raylib.CloseWindow()
 }
 
 // Termbox will eventually use termbox-go to draw emulator output in a terminal window.

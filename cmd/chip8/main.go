@@ -18,7 +18,7 @@ var (
 )
 
 func init() {
-	flag.StringVar(&GraphicsMode, "ui", "raylib", "Which UI should the emulator use? Options: raylib (default), termbox.")
+	flag.StringVar(&GraphicsMode, "ui", "sdl", "Which UI should the emulator use? Options: sdl (default), termbox.")
 	flag.BoolVar(&Debug, "debug", false, "Set debug to true if you want to log CPU internals")
 	flag.IntVar(&ClockSpeed, "clock-speed", 60, "Set the CPU clock speed (in Hertz).")
 	flag.StringVar(&RomFile, "rom", "", "Set the ROM filename that the emulator will load.")

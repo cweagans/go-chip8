@@ -4,7 +4,7 @@ go:
 
 before_install:
   - sudo apt-get update -y
-  - sudo apt-get install libasound2-dev libxi-dev libxinerama-dev libxcursor-dev libxxf86vm-dev libxrandr-dev -y
+  - sudo apt install libsdl2{,-image,-mixer,-ttf,-gfx}-dev -y
 
 install:
   - go get -u github.com/golang/dep/cmd/dep

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gen2brain/raylib-go/raylib"
 	termbox "github.com/nsf/termbox-go"
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 // Graphics objects allow the emulator to draw to the screen in a backend
@@ -27,6 +28,10 @@ func GetGraphics(graphicsType string) Graphics {
 		g := &Noop{}
 		g.Init()
 		return g
+	case "sdl":
+		g := &Sdl{}
+		g.Init()
+		return g
 	case "raylib":
 		fallthrough
 	default:
@@ -36,6 +41,19 @@ func GetGraphics(graphicsType string) Graphics {
 	}
 
 	return nil
+}
+
+// Sdl will draw emulator output in a separate GUI window with SDL.
+type Sdl struct{}
+
+func (s Sdl) Init() {
+	if err := sdl.Init(sdl.INIT_EVERYTHING); err != nil {
+		panic(err)
+	}
+}
+func (s Sdl) Draw() {}
+func (s Sdl) Shutdown() {
+	sdl.Quit()
 }
 
 // Raylib will draw emulator output in a separate GUI window.

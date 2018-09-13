@@ -2,44 +2,69 @@
 
 
 [[projects]]
+  digest = "1:56c130d885a4aacae1dd9c7b71cfe39912c7ebc1ff7d2b46083c8812996dc43b"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
+  pruneopts = ""
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
   version = "v1.1.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:29759426e722f2a5b766e1b17ed3c94b89678c6b1cbee1c352562fde443eede2"
   name = "github.com/gen2brain/raylib-go"
   packages = ["raylib"]
+  pruneopts = ""
   revision = "eec2b1e49469188288302ed9c5a1da0a1e822ff0"
 
 [[projects]]
+  digest = "1:81e673df85e765593a863f67cba4544cf40e8919590f04d67664940786c2b61a"
   name = "github.com/mattn/go-runewidth"
   packages = ["."]
+  pruneopts = ""
   revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
   version = "v0.0.2"
 
 [[projects]]
   branch = "master"
+  digest = "1:1a25d906193d34ce43e96fcab1a2de2b90e0242f9b0c176564db1b268bf48ea5"
   name = "github.com/nsf/termbox-go"
   packages = ["."]
+  pruneopts = ""
   revision = "5c94acc5e6eb520f1bcd183974e01171cc4c23b3"
 
 [[projects]]
+  digest = "1:256484dbbcd271f9ecebc6795b2df8cad4c458dd0f5fd82a8c2fa0c29f233411"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = ""
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:c587772fb8ad29ad4db67575dad25ba17a51f072ff18a22b4f0257a4d9c24f75"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
+  pruneopts = ""
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
+
+[[projects]]
+  digest = "1:4aa77644fa15ef170580070adcb70bd0adb02b0980bcc632eeaa528fd0e8137e"
+  name = "github.com/veandco/go-sdl2"
+  packages = ["sdl"]
+  pruneopts = ""
+  revision = "271d2ec43388932fd2a80f4c2e81021734685a62"
+  version = "v0.3"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e3d75be496806ff9406b05e316eb47b38dade8413ed0b6eda697acaf4c9e87ff"
+  input-imports = [
+    "github.com/gen2brain/raylib-go/raylib",
+    "github.com/nsf/termbox-go",
+    "github.com/stretchr/testify/assert",
+    "github.com/veandco/go-sdl2/sdl",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

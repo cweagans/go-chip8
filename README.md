@@ -7,11 +7,11 @@ is generally agreed to be the easiest starting point, so I started there.
 
 ## Usage
 
-Right now, the emulator is not functional (unless your ROM just clears the screen
-repeatedly).
+Right now, the emulator doesn't do a lot, but if your ROM only uses the opcodes
+that are implemented, it should work okay. The IBM Logo ROM from the CHIP-8 pack
+works decently and was the first 3rd party ROM that I was able to run.
 
-When it's functional, you might be interested in the CHIP-8 program pack, which
-can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?page=109
+The CHIP-8 pack can be found here: https://web.archive.org/web/20130903155600/http://chip8.com/?page=109
 
 ## Reference material
 

@@ -4,7 +4,7 @@ go:
 
 before_install:
   - sudo apt-get update -y
-  - sudo apt install libsdl2{,-image,-mixer,-ttf,-gfx}-dev libglu1-mesa-dev libglu1-mesa -y
+  - sudo apt install libsdl2{,-image,-mixer,-ttf,-gfx}-dev libglu1-mesa-dev libglu1-mesa libegl1-mesa-dev libgles2-mesa-dev -y
 
 install:
   - go get -u github.com/golang/dep/cmd/dep

@@ -7,18 +7,18 @@ import (
 	"os"
 
 	"github.com/cweagans/chip8/pkg/cpu"
-	"github.com/cweagans/chip8/pkg/graphics"
+	"github.com/cweagans/chip8/pkg/ui"
 )
 
 var (
-	RomFile      string
-	GraphicsMode string
-	Debug        bool
-	ClockSpeed   int
+	RomFile    string
+	UIMode     string
+	Debug      bool
+	ClockSpeed int
 )
 
 func init() {
-	flag.StringVar(&GraphicsMode, "ui", "sdl", "Which UI should the emulator use? Options: sdl (default), termbox.")
+	flag.StringVar(&UIMode, "ui", "sdl", "Which UI should the emulator use? Options: sdl (default), termbox.")
 	flag.BoolVar(&Debug, "debug", false, "Set debug to true if you want to log CPU internals")
 	flag.IntVar(&ClockSpeed, "clock-speed", 60, "Set the CPU clock speed (in Hertz).")
 	flag.StringVar(&RomFile, "rom", "", "Set the ROM filename that the emulator will load.")
@@ -31,8 +31,8 @@ func init() {
 }
 
 func main() {
-	// Get a graphics object.
-	g := graphics.GetGraphics(GraphicsMode)
+	// Get a UI object.
+	u := ui.GetUI(UIMode)
 
 	// Load ROM to pass to CPU.
 	rom, err := loadRom(RomFile)
@@ -41,7 +41,7 @@ func main() {
 	}
 
 	// Create a new CPU.
-	c := cpu.NewCpu(g, rom, Debug)
+	c := cpu.NewCpu(u, rom, Debug)
 
 	// Set the clock speed based on input.
 	c.SetClockSpeed(ClockSpeed)

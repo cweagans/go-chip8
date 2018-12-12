@@ -3,7 +3,7 @@ package cpu
 import (
 	"testing"
 
-	"github.com/cweagans/chip8/pkg/graphics"
+	"github.com/cweagans/chip8/pkg/ui"
 	asrt "github.com/stretchr/testify/assert"
 )
 
@@ -13,7 +13,7 @@ import (
 func TestNewCpu(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0xff, 0xff}
 	cpu := NewCpu(g, r, false)
 
@@ -22,11 +22,11 @@ func TestNewCpu(t *testing.T) {
 	assert.Equal(uint16(0x200), cpu.PC)
 }
 
-// Test that ClearGfx clears the graphics buffer + sets ShouldDraw.
+// Test that ClearGfx clears the ui buffer + sets ShouldDraw.
 func TestClearGfx(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{}
 	cpu := NewCpu(g, r, false)
 
@@ -60,7 +60,7 @@ func TestClearGfx(t *testing.T) {
 func TestGetOp(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x00, 0xE0}
 	cpu := NewCpu(g, r, false)
 
@@ -91,7 +91,7 @@ func TestGetOp(t *testing.T) {
 func Test00e0(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x00, 0xE0}
 	cpu := NewCpu(g, r, false)
 
@@ -120,7 +120,7 @@ func Test00e0(t *testing.T) {
 func Test00ee(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x00, 0xE0, 0x00, 0xEE}
 	cpu := NewCpu(g, r, false)
 
@@ -143,7 +143,7 @@ func Test00ee(t *testing.T) {
 func Test1nnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x12, 0x34}
 	cpu := NewCpu(g, r, false)
 
@@ -161,7 +161,7 @@ func Test1nnn(t *testing.T) {
 func Test2nnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x22, 0x34}
 	cpu := NewCpu(g, r, false)
 
@@ -182,7 +182,7 @@ func Test2nnn(t *testing.T) {
 func Test3xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x3A, 0x22}
 	cpu := NewCpu(g, r, false)
 
@@ -209,7 +209,7 @@ func Test3xnn(t *testing.T) {
 func Test4xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x4A, 0x22}
 	cpu := NewCpu(g, r, false)
 
@@ -236,7 +236,7 @@ func Test4xnn(t *testing.T) {
 func Test5xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x5A, 0x10}
 	cpu := NewCpu(g, r, false)
 
@@ -263,7 +263,7 @@ func Test5xnn(t *testing.T) {
 func Test6xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x6A, 0xFF}
 	cpu := NewCpu(g, r, false)
 
@@ -278,7 +278,7 @@ func Test6xnn(t *testing.T) {
 func Test7xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x7A, 0x12}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0x12)
@@ -294,7 +294,7 @@ func Test7xnn(t *testing.T) {
 func Test8XY0(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x8A, 0x10}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0x1] = uint8(0x55)
@@ -310,7 +310,7 @@ func Test8XY0(t *testing.T) {
 func Test8XY1(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x8A, 0xB1}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0x10)
@@ -327,7 +327,7 @@ func Test8XY1(t *testing.T) {
 func Test8XY2(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x8A, 0xB2}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0x10)
@@ -344,7 +344,7 @@ func Test8XY2(t *testing.T) {
 func Test8XY3(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x8A, 0xB3}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0x10)
@@ -361,7 +361,7 @@ func Test8XY3(t *testing.T) {
 func Test9xnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0x9A, 0x10}
 	cpu := NewCpu(g, r, false)
 
@@ -388,7 +388,7 @@ func Test9xnn(t *testing.T) {
 func TestAnnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0xA2, 0x34}
 	cpu := NewCpu(g, r, false)
 
@@ -406,7 +406,7 @@ func TestAnnn(t *testing.T) {
 func TestCxnn(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0xCA, 0x12}
 	cpu := NewCpu(g, r, false)
 
@@ -421,7 +421,7 @@ func TestCxnn(t *testing.T) {
 func TestFx15(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0xFA, 0x15}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0xFF)
@@ -437,7 +437,7 @@ func TestFx15(t *testing.T) {
 func TestFx18(t *testing.T) {
 	assert := asrt.New(t)
 
-	g := &graphics.Noop{}
+	g := &ui.Noop{}
 	r := []byte{0xFA, 0x18}
 	cpu := NewCpu(g, r, false)
 	cpu.Registers[0xA] = uint8(0xFF)

@@ -5,13 +5,13 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/cweagans/chip8/pkg/graphics"
+	"github.com/cweagans/chip8/pkg/ui"
 )
 
 // Cpu is the core model of the system.
 type Cpu struct {
 	// Vram          [64 * 32]bool
-	Graphics      graphics.Graphics
+	UI            ui.UI
 	Vram          [32]int64
 	ShouldDraw    bool
 	ClockSpeed    int
@@ -40,10 +40,10 @@ func (uoe *UnknownOpcodeError) Error() string {
 	return fmt.Sprintf("Unknown opcode 0x%X at address 0x%X", uoe.Opcode, uoe.Address)
 }
 
-// InitCpu() sets up a new CPU and loads the rom into memory.
-func NewCpu(g graphics.Graphics, r []byte, debug bool) *Cpu {
+// NewCpu() sets up a new CPU and loads the rom into memory.
+func NewCpu(u ui.UI, r []byte, debug bool) *Cpu {
 	cpu := &Cpu{}
-	cpu.Graphics = g
+	cpu.UI = u
 	cpu.PC = 0x200
 	cpu.ShouldDraw = false
 	cpu.ShouldHalt = false
@@ -107,10 +107,16 @@ func (c *Cpu) Run() {
 
 		// If ShouldDraw has been set, we need to update the screen.
 		if c.ShouldDraw {
-			c.Graphics.Draw(c.Vram)
+			c.UI.Draw(c.Vram)
 		}
 
-		// @TODO: Get input state.
+		// Process input.
+		// go func() {
+		// 	i := c.UI.GetInput()
+		// 	if i.KeyEsc {
+		// 		c.ShouldHalt = true
+		// 	}
+		// }()
 
 		// If either timer is > 0, decrease them by 1.
 		if c.DelayTimer > 0 {

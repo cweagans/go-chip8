@@ -6,7 +6,7 @@ vendor:
 	dep ensure
 
 test:
-	go test -v github.com/cweagans/chip8/pkg/cpu github.com/cweagans/chip8/pkg/graphics
+	go test -v github.com/cweagans/chip8/pkg/cpu github.com/cweagans/chip8/pkg/ui
 
 lint:
-	go vet github.com/cweagans/chip8/pkg/cpu github.com/cweagans/chip8/pkg/graphics github.com/cweagans/chip8/cmd/chip8
+	go vet github.com/cweagans/chip8/pkg/cpu github.com/cweagans/chip8/pkg/ui github.com/cweagans/chip8/cmd/chip8
